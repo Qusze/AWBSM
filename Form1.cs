@@ -18,8 +18,15 @@ namespace AWBSM
               "Data Source = C:\\Users\\alepo\\source\\repos\\AWBSM\\AWBSM\\DBAWB.mdb";
 
         private int act_table = 1;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox1.SelectedIndex = 0;
+            button1_Click(sender, e);
+        }
+
         public Form1()
         {
+            
             InitializeComponent();
         }
 

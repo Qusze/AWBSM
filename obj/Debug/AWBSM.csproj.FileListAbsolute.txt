@@ -9,3 +9,4 @@ C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.csproj.CoreCompileInputs
 C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.exe
 C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.pdb
 C:\Users\alepo\source\repos\AWBSM\AWBSM\bin\Debug\DBAWB.mdb
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form2.resources
