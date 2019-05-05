@@ -1,0 +1,11 @@
+C:\Users\alepo\source\repos\AWBSM\AWBSM\bin\Debug\AWBSM.exe.config
+C:\Users\alepo\source\repos\AWBSM\AWBSM\bin\Debug\AWBSM.exe
+C:\Users\alepo\source\repos\AWBSM\AWBSM\bin\Debug\AWBSM.pdb
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.csprojAssemblyReference.cache
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form1.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Properties.Resources.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.csproj.GenerateResource.cache
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.csproj.CoreCompileInputs.cache
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.exe
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.pdb
+C:\Users\alepo\source\repos\AWBSM\AWBSM\bin\Debug\DBAWB.mdb
