@@ -41,11 +41,6 @@ namespace AWBSM
             
         }
 
-        private void водителыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -238,7 +233,64 @@ namespace AWBSM
         }
         private void button9_Click(object sender, EventArgs e)
         {
+            if (act_table == 1) // обрабатываем таблицу "Билет"
+            {
+                Form4 f = new Form4();
 
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    // добавляем данные в таблицу "Билеты"
+                    Add_Bilet(f.textBox1.Text, f.textBox2.Text, Convert.ToDateTime(f.textBox3.Text),
+         f.textBox4.Text, f.textBox5.Text, f.checkBox1.Checked);
+                    Get_Bilets();
+                }
+            }
+            else
+    if (act_table == 2) // обрабатываем таблицу "Маршрут"
+            {
+                Form5 f = new Form5();
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    // добавляем данные в таблицу "Маршрут"
+                    Add_Marshrut(f.textBox1.Text, f.textBox2.Text, f.textBox3.Text, f.textBox4.Text,
+                      Convert.ToDouble(f.textBox5.Text), Convert.ToDouble(f.textBox6.Text),
+         f.dateTimePicker1.Value, f.dateTimePicker2.Value);
+                    Get_Marshruts();
+                }
+            }
+            else
+    if (act_table == 3) // обрабатываем таблицу "Автобус"
+            {
+                Form6 f = new Form6();
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    // добавляем данные в таблицу "Автобус"
+                    Add_Avtobus(f.textBox1.Text, f.textBox2.Text, f.textBox3.Text, f.textBox4.Text);
+                    Get_Avtobus();
+                }
+            }
+            else
+    if (act_table == 4) // обрабатываем таблицу "Водитель"
+            {
+                Form7 f = new Form7();
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    // добавляем данные в таблицу "Водитель"
+                    Add_Voditel(f.textBox1.Text, Convert.ToString(f.dateTimePicker1.Value), f.textBox2.Text);
+                    Get_Voditel();
+                }
+            }
+            else
+    if (act_table == 5) // обрабатываем таблицу "Диспетчер"
+            {
+                Form8 f = new Form8();
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    // добавляем данные в таблицу "Диспетчер"
+                    Add_Dispetcher(f.textBox1.Text, Convert.ToString(f.dateTimePicker1.Value), f.textBox2.Text);
+                    Get_Dispetcher();
+                }
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -342,6 +394,52 @@ namespace AWBSM
             dataAdapter.Fill(ds, "Водитель");
             dataGridView2.DataSource = ds.Tables[0].DefaultView;
             dataGridView2.Columns[0].Visible = false;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Form3 f = new Form3();
+            f.Text = " ";
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                int index, index_old;
+                string ID;
+                string CommandText = "DELETE FROM ";
+                index = dataGridView2.CurrentRow.Index; // № по порядку в таблице представления
+                index_old = index;
+                ID = Convert.ToString(dataGridView2[0, index].Value); // ID подаем в запрос как строку
+
+                // Формируем строку CommandText
+                if (act_table == 1) // обрабатываем таблицу "Билет"
+                    CommandText = "DELETE FROM Билет WHERE Билет.ID_Bilet = " + ID;
+                if (act_table == 2) // обрабатываем таблицу "Маршрут"
+                    CommandText = "DELETE FROM Маршрут WHERE Маршрут.ID_Marshrut = " + ID;
+                if (act_table == 3) // обрабатываем таблицу "Автобус"
+                    CommandText = "DELETE FROM Автобус WHERE Автобус.ID_Avtobus = " + ID;
+                if (act_table == 4) // обрабатываем таблицу "Водитель"
+                    CommandText = "DELETE FROM Водитель WHERE Водитель.ID_Voditel = " + ID;
+                if (act_table == 5) // обрабатываем таблицу "Диспетчер"
+                    CommandText = "DELETE FROM Диспетчер WHERE Диспетчер.ID_Dispetcher = " + ID;
+                // выполняем SQL-запрос
+                My_Execute_Non_Query(CommandText);
+
+                // перерисовывание dbGridView2
+                if (act_table == 1) Get_Bilets();
+                else
+                if (act_table == 2) Get_Marshruts();
+                else
+                if (act_table == 3) Get_Avtobus();
+                else
+                if (act_table == 4) Get_Voditel();
+                else
+                if (act_table == 5) Get_Dispetcher();
+
+                if (index_old >= 0)
+                {
+                    dataGridView2.ClearSelection();
+                    dataGridView2[0, index_old].Selected = true;
+                }
+            }
         }
     }
 }

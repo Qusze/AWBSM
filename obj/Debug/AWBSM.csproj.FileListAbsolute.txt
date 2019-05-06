@@ -10,3 +10,9 @@ C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.exe
 C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.pdb
 C:\Users\alepo\source\repos\AWBSM\AWBSM\bin\Debug\DBAWB.mdb
 C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form2.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form3.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form4.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form5.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form6.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form7.resources
+C:\Users\alepo\source\repos\AWBSM\AWBSM\obj\Debug\AWBSM.Form8.resources

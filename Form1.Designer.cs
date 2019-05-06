@@ -94,12 +94,14 @@
             this.добавитьToolStripMenuItem1.Name = "добавитьToolStripMenuItem1";
             this.добавитьToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.добавитьToolStripMenuItem1.Text = "Добавить...";
+            this.добавитьToolStripMenuItem1.Click += new System.EventHandler(this.button2_Click);
             // 
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
             this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.button3_Click);
             // 
             // билетыToolStripMenuItem
             // 
@@ -119,31 +121,35 @@
             this.билетыToolStripMenuItem1.Name = "билетыToolStripMenuItem1";
             this.билетыToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.билетыToolStripMenuItem1.Text = "Билеты";
+            this.билетыToolStripMenuItem1.Click += new System.EventHandler(this.button4_Click);
             // 
             // маршрутыToolStripMenuItem
             // 
             this.маршрутыToolStripMenuItem.Name = "маршрутыToolStripMenuItem";
             this.маршрутыToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.маршрутыToolStripMenuItem.Text = "Маршруты";
+            this.маршрутыToolStripMenuItem.Click += new System.EventHandler(this.button5_Click);
             // 
             // автобусыToolStripMenuItem
             // 
             this.автобусыToolStripMenuItem.Name = "автобусыToolStripMenuItem";
             this.автобусыToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.автобусыToolStripMenuItem.Text = "Автобусы";
+            this.автобусыToolStripMenuItem.Click += new System.EventHandler(this.button6_Click);
             // 
             // водителыToolStripMenuItem
             // 
             this.водителыToolStripMenuItem.Name = "водителыToolStripMenuItem";
             this.водителыToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.водителыToolStripMenuItem.Text = "Водители";
-            this.водителыToolStripMenuItem.Click += new System.EventHandler(this.водителыToolStripMenuItem_Click);
+            this.водителыToolStripMenuItem.Click += new System.EventHandler(this.button7_Click);
             // 
             // диспетчерыToolStripMenuItem
             // 
             this.диспетчерыToolStripMenuItem.Name = "диспетчерыToolStripMenuItem";
             this.диспетчерыToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.диспетчерыToolStripMenuItem.Text = "Диспетчеры";
+            this.диспетчерыToolStripMenuItem.Click += new System.EventHandler(this.button8_Click);
             // 
             // dataGridView1
             // 
@@ -360,6 +366,7 @@
             this.button10.TabIndex = 1;
             this.button10.Text = "Удалить";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
