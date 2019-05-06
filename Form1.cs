@@ -22,6 +22,7 @@ namespace AWBSM
         {
             comboBox1.SelectedIndex = 0;
             button1_Click(sender, e);
+            Get_Bilets();
         }
 
         public Form1()
@@ -120,12 +121,85 @@ namespace AWBSM
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string CommandText;
+            string num_per, ID_M, ID_B, ID_D, ID_A, ID_V;
+            int row;
+            Form2 f = new Form2(); // создали новую форму
 
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                // добавляем данные
+                // Номер перевозки
+                if (f.textBox1.Text == "") num_per = "0";
+                else num_per = f.textBox1.Text;
+                // добавляем ID_Marshrut
+                row = f.dataGridView1.CurrentCell.RowIndex; // взяли строку с dataGridView1
+                ID_M = Convert.ToString(f.dataGridView1[0, row].Value);
+                // добавляем ID_Bilet
+                row = f.dataGridView2.CurrentCell.RowIndex; // взяли строку с dataGridView2
+                ID_B = Convert.ToString(f.dataGridView2[0, row].Value);
+                // добавляем ID_Dispetcher
+                row = f.dataGridView3.CurrentCell.RowIndex; // взяли строку с dataGridView3
+                ID_D = Convert.ToString(f.dataGridView3[0, row].Value);
+                // добавляем ID_Avtobus
+                row = f.dataGridView4.CurrentCell.RowIndex; // взяли строку с dataGridView4
+                ID_A = Convert.ToString(f.dataGridView4[0, row].Value);
+                // добавляем ID_Voditel
+                row = f.dataGridView5.CurrentCell.RowIndex; // взяли строку с dataGridView5
+                ID_V = Convert.ToString(f.dataGridView5[0, row].Value);
+                // формируем CommandText
+                CommandText = "INSERT INTO [Перевозка] (Номер, ID_Marshrut, ID_Bilet, ID_Dispetcher, ID_Avtobus, ID_Voditel) " +
+                "VALUES (" + num_per + ", " + ID_M + ", " + ID_B + ", " +
+                         ID_D + ", " + ID_A + ", " + ID_V + ")";
+
+                // выполняем SQL-команду
+                My_Execute_Non_Query(CommandText);
+                // перерисовываем dataGridView1
+                button1_Click(sender, e);
+            }
+        }
+
+        private void My_Execute_Non_Query(string CommandText)
+        {
+            
+                OleDbConnection conn = new OleDbConnection(ConnectionString);
+                conn.Open();
+                OleDbCommand myCommand = conn.CreateCommand();
+                myCommand.CommandText = CommandText;
+                myCommand.ExecuteNonQuery();
+                conn.Close();
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Form3 f = new Form3();
 
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                int index, index_old;
+                string ID;
+                string CommandText = "DELETE FROM ";
+
+                index = dataGridView1.CurrentRow.Index; // № по порядку в таблице представления
+                index_old = index;
+                ID = Convert.ToString(dataGridView1[0, index].Value); // ID подаем в запрос как строку
+
+                // Формируем строку CommandText
+                CommandText = "DELETE FROM [Перевозка] WHERE [Перевозка].[Номер] = '" + ID + "'";
+
+                // выполняем SQL-запрос
+                My_Execute_Non_Query(CommandText);
+
+                // перерисовывание dbGridView1
+                button1_Click(sender, e);
+
+                if (index_old >= 0)
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1[0, index_old].Selected = true;
+                }
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,14 +209,33 @@ namespace AWBSM
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            Get_Avtobus();
+            act_table = 3;
+        }
+        private void Get_Avtobus()  // читает все поля из таблицы "Автобус"
+        {
+            string CommandText = "SELECT * FROM Автобус";
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(CommandText, ConnectionString);
+            DataSet ds = new DataSet();  // создаем объект DataSet
+            dataAdapter.Fill(ds, "Автобус"); // заполняем набор данных данными из таблицы "Автобус"
+            dataGridView2.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.Columns[0].Visible = false; // спрятать нулевой столбец (поле ID_Avtobus)
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            Get_Dispetcher();
+            act_table = 5;
         }
-
+        private void Get_Dispetcher()
+        {
+            string CommandText = "SELECT * FROM [Диспетчер]";
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(CommandText, ConnectionString);
+            DataSet ds = new DataSet();
+            dataAdapter.Fill(ds, "Диспетчер");
+            dataGridView2.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.Columns[0].Visible = false;
+        }
         private void button9_Click(object sender, EventArgs e)
         {
 
@@ -151,6 +244,53 @@ namespace AWBSM
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
        
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Get_Bilets();
+            act_table = 1;
+        }
+        private void Get_Bilets()  // читает все поля из таблицы "Билет"
+        {
+            string CommandText = "SELECT ID_Bilet, [Место], [Стоимость], [Время], [Ф_И_О], [Паспорт], [Льготы] FROM [Билет]";
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(CommandText, ConnectionString);
+
+            // создаем объект DataSet
+            DataSet ds = new DataSet();
+            // заполняем dataGridView1 данными из таблицы "Билет" базы данных
+            dataAdapter.Fill(ds, "[Билет]");
+            dataGridView2.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.Columns[0].Visible = false; // Прячем поле ID_Bilets
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Get_Marshruts();
+            act_table = 2;
+        }
+        private void Get_Marshruts()  // читает все поля из таблицы "Маршрут"
+        {
+            string CommandText = "SELECT * FROM [Маршрут]";
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(CommandText, ConnectionString);
+            DataSet ds = new DataSet();  // создаем объект DataSet
+            dataAdapter.Fill(ds, "[Маршрут]");
+            dataGridView2.DataSource = ds.Tables[0].DefaultView;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Get_Voditel();
+            act_table = 4;
+        }
+        private void Get_Voditel()  // читает все поля из таблицы "Водитель"
+        {
+            string CommandText = "SELECT * FROM Водитель";
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(CommandText, ConnectionString);
+            DataSet ds = new DataSet();
+            dataAdapter.Fill(ds, "Водитель");
+            dataGridView2.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.Columns[0].Visible = false;
         }
     }
 }
