@@ -245,7 +245,58 @@ namespace AWBSM
         {
        
         }
+        private void Add_Bilet(string mesto, string stoimost, DateTime vremja, string name, string passport, bool lgota)
+        {
+            string CommandText;
+            string s_vremja;
+            string s_stoimost;
+            s_vremja = Convert.ToString(vremja); // переводим время в строку
+            s_stoimost = stoimost.Replace(',', '.'); // меняем разделитель разрядов '.' на 
+                                                     // разделитель понятный синтаксису SQL '.'
 
+            CommandText = "INSERT INTO [Билет] (Место, Стоимость, [Время], [Ф_И_О], Паспорт, Льготы) " + "VALUES ('" + mesto + "', " + s_stoimost + ", '" + s_vremja + "', '"
+            + name + "', '" + passport + "', " + lgota + ")";
+            My_Execute_Non_Query(CommandText);
+        }
+        private void Add_Marshrut(string num_marsh, string punkt, string rajon, string oblast, double rasst, double ves, DateTime vremja_otpr, DateTime vremja_prib)
+        {
+            string CommandText;
+            string s_otpr, s_prib;
+            string s_ves, s_rasst;
+
+            s_otpr = Convert.ToString(vremja_otpr); // переводим время отправки в строку
+            s_prib = Convert.ToString(vremja_prib); // переводим время прибытия в строку
+            s_ves = Convert.ToString(ves); // переводим вес из double в строку
+            s_ves = s_ves.Replace(',', '.'); // меняем запятую на точку согласно синтаксису SQL
+            s_rasst = Convert.ToString(rasst); // переводим расстояние из double в string
+            s_rasst = s_rasst.Replace(',', '.'); // меняем запятую на точку
+
+            CommandText = "INSERT INTO [Маршрут] ([Номер маршрута], [Пункт назначения], Район, Область, Расстояние, Вес, [Время отправки], [Время прибытия])"
+            + " VALUES ('" + num_marsh + "', '" + punkt + "', '" + rajon + "', '" + oblast + "', "
+            + s_rasst + ", " + s_ves + ", '" + s_otpr + "', '" + s_prib + "')";
+            My_Execute_Non_Query(CommandText);
+        }
+        void Add_Avtobus(string num, string model, string znak, string k_mest)
+        {
+            string CommandText;
+            CommandText = "INSERT INTO [Автобус] ([Номер], [Модель], [Номерной знак], [Количество мест])"
+            + " VALUES ('" + num + "', '" + model + "', '" + znak + "', " + k_mest + ")";
+            My_Execute_Non_Query(CommandText);
+        }
+        void Add_Voditel(string f_i_o, string d_r, string passport) // добавить водителя
+        {
+            string CommandText;
+            CommandText = "INSERT INTO [Водитель] ([Ф_И_О], [Дата рождения], [Паспорт])"
+            + " VALUES ('" + f_i_o + "', '" + d_r + "', '" + passport + "')";
+            My_Execute_Non_Query(CommandText);
+        }
+        void Add_Dispetcher(string f_i_o, string d_r, string adres) // добавить диспетчера
+        {
+            string CommandText;
+            CommandText = "INSERT INTO [Диспетчер] ([Ф_И_О], [Дата рождения], [Адрес])"
+            + " VALUES ('" + f_i_o + "', '" + d_r + "', '" + adres + "')";
+            My_Execute_Non_Query(CommandText);
+        }
         private void button4_Click(object sender, EventArgs e)
         {
             Get_Bilets();
